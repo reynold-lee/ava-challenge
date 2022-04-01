@@ -25,6 +25,8 @@ export const addConversation = async (
 
     const conversation = new Conversation(request);
 
+    conversation.id = Date.now();
+
     const newConversation = await conversation.save();
 
     res.status(201).json(newConversation);
