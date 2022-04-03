@@ -20,13 +20,18 @@ export const mutation = async (req: Request, res: Response) => {
             bob: req.body.origin.bob,
           },
         },
-      }
+      },
+      { new: true }
     );
 
     if (conversation != null) {
-      const updateConversation = await conversation.save();
+      await conversation.save();
 
-      res.status(201).json({ ok: true, text: updateConversation.text });
+      res.status(201).json({
+        ok: true,
+        text: conversation.text,
+        conversation: conversation,
+      });
     } else {
       res.status(400).json({ ok: false, msg: "Error occurred" });
     }

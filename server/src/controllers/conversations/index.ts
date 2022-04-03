@@ -34,3 +34,17 @@ export const addConversation = async (
     throw error;
   }
 };
+
+export const deleteConversation = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    const { id } = await req.params;
+
+    const conversation = await Conversation.findOneAndDelete({ id: id });
+    res.status(200).json(conversation);
+  } catch (error) {
+    throw error;
+  }
+};
